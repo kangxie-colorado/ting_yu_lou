@@ -31,3 +31,21 @@ class Solution:
                 r = m-1
         return l
 
+# another solution - not quite binary search but still pretty good
+class Solution:
+    def countNodes(self, root: Optional[TreeNode]) -> int:
+        def helper(root):
+
+            left = root
+            right = root
+            depth = 0
+            while right:
+                right = right.right
+                left = left.left
+                depth += 1
+
+            if left is None:
+                return 2**depth - 1
+            else:
+                return 1 + helper(root.left) + helper(root.right)
+        return helper(root)
