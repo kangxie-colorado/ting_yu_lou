@@ -15,14 +15,12 @@ class Solution:
                 return root is not None
             mask = 1 << (n-1)
             curr = root
-            while n > 0:
+            while curr and n > 0:
                 curr = curr.right if m & mask else curr.left
-                if curr is None:
-                    return False
                 n -= 1
                 mask >>= 1
 
-            return True
+            return curr is not None
 
         l, r = 0, 50000
         while l < r:
@@ -32,26 +30,4 @@ class Solution:
             else:
                 r = m-1
         return l
-
-    # another solution but kind of werid, not binary search at all
-    class Solution:
-    def countNodes(self, root: Optional[TreeNode]) -> int:
-        def helper(root):
-            curr = root
-            rightDepth = 0
-            while curr:
-                rightDepth += 1
-                curr = curr.right
-
-            curr = root
-            leftDepth = 0
-            while curr:
-                leftDepth += 1
-                curr = curr.left
-
-            if leftDepth == rightDepth:
-                return 2**leftDepth-1
-            else:
-                return 1 + helper(root.left) + helper(root.right)
-        return helper(root)
 
