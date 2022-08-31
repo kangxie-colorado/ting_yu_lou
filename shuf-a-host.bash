@@ -1,7 +1,8 @@
-shuf_5() 
+shuf_n() 
 {
+  n=$1
   cmd="shuf next-host-pool"
-  for i in {1..5}
+  for i in $(seq 1 $n)
   do
     cmd="shuf <($cmd)"
   done
@@ -25,6 +26,6 @@ for i in $(seq 1 8); do
 done
 
 echo "*                                                                              *"
-echo -e "\033[${green}m${bold}*      签落谁家，自有分晓，恭喜: $(shuf_5 | shuf -n 1)              "
+echo -e "\033[${green}m${bold}*      签落谁家，自有分晓，恭喜: $(shuf_n 10 | shuf -n 1)              "
 echo "${normal}********************************************************************************"
 
