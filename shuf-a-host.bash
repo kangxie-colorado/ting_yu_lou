@@ -8,12 +8,23 @@ shuf_5()
   eval $cmd
 }
 
-for i in $(seq 1 10); do
+green="0;32"
+bold=$(tput bold)
+normal=$(tput sgr0)
+
+echo "********************************************************************************"
+echo "*      听 雨 楼 - 抽签仪式                                                     *"
+echo "*                                                                              *"
+
+for i in $(seq 1 8); do
      msg=$(shuf -n 1 teasing-messages)
      candidate=$(shuf -n 1 next-host-pool)
-     echo -ne "$msg ---- $candidate\033[0K\r"
-     sleep 1
+     color=$(shuf -n 1 colors)
+     echo -ne "\033[${color}m*      $msg ---- $candidate                                           \033[0K\r"
+     sleep 2
 done
 
-echo "And it is official, congratulations: $(shuf_5 | shuf -n 1)"
+echo "*                                                                              *"
+echo -e "\033[${green}m${bold}*      签落谁家，自有分晓，恭喜: $(shuf_5 | shuf -n 1)              "
+echo "${normal}********************************************************************************"
 
